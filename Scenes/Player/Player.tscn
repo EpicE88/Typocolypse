@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://cbok8gygx4qma"]
 
+[ext_resource type="Script" uid="uid://bhjldo0k38xcj" path="res://Scenes/Player/Player.gd" id="1_4wape"]
 [ext_resource type="Texture2D" uid="uid://nlerhqokc4h" path="res://assets/character/The Female Adventurer - Premium/Idle/Gun/Idle_Gun_Up.png" id="1_h54ih"]
 [ext_resource type="Texture2D" uid="uid://rsbdigdnypxh" path="res://assets/character/The Female Adventurer - Premium/Death/Gun/death_Gun_Up.png" id="2_jmcll"]
 [ext_resource type="Texture2D" uid="uid://da8wgwk1xu0fp" path="res://assets/character/The Female Adventurer - Premium/Run/Gun/Run_Gun_Left.png" id="2_ude3g"]
@@ -121,6 +122,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_825xp"]
 resource_name = "run_right"
+loop_mode = 1
 step = 0.15
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -149,6 +151,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_0kmp4"]
 resource_name = "shoot"
+loop_mode = 1
 step = 0.15
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -185,12 +188,60 @@ _data = {
 &"shoot": SubResource("Animation_0kmp4")
 }
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4wape"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_t26db"]
+animation = &"run_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fk5o5"]
+animation = &"run_right"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fk5o5"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_825xp"]
+advance_mode = 2
+advance_expression = "int(_direction.x) == -1"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ji083"]
+advance_mode = 2
+advance_expression = "int(_direction.x) == 1"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4wape"]
+advance_mode = 2
+advance_expression = "int(_direction.x) == 0"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_t26db"]
+advance_mode = 2
+advance_expression = "int(_direction.x) == 0"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_ji083"]
+states/Start/position = Vector2(206, 100)
+states/idle/node = SubResource("AnimationNodeAnimation_4wape")
+states/idle/position = Vector2(364, 100)
+states/run_left/node = SubResource("AnimationNodeAnimation_t26db")
+states/run_left/position = Vector2(562, 46)
+states/run_right/node = SubResource("AnimationNodeAnimation_fk5o5")
+states/run_right/position = Vector2(562, 167)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_fk5o5"), "idle", "run_left", SubResource("AnimationNodeStateMachineTransition_825xp"), "idle", "run_right", SubResource("AnimationNodeStateMachineTransition_ji083"), "run_left", "idle", SubResource("AnimationNodeStateMachineTransition_4wape"), "run_right", "idle", SubResource("AnimationNodeStateMachineTransition_t26db")]
+graph_offset = Vector2(-19, 13)
+
 [node name="Player" type="Node2D" unique_id=226345835]
+script = ExtResource("1_4wape")
+speed = 1000.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=540159094]
 texture = ExtResource("1_h54ih")
 hframes = 8
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D" unique_id=880397538]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=880397538]
+root_node = NodePath("../Sprite2D")
 libraries/ = SubResource("AnimationLibrary_ji083")
 autoplay = &"idle"
+
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=1618500781]
+root_node = NodePath("../Sprite2D")
+tree_root = SubResource("AnimationNodeStateMachine_ji083")
+advance_expression_base_node = NodePath("..")
+anim_player = NodePath("../AnimationPlayer")
