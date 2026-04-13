@@ -1,9 +1,18 @@
 [gd_scene format=3 uid="uid://btwnjxrph5uup"]
 
 [ext_resource type="PackedScene" uid="uid://cbok8gygx4qma" path="res://Scenes/Player/Player.tscn" id="1_vbawi"]
+[ext_resource type="PackedScene" uid="uid://bp0ocu07dl4su" path="res://Scenes/Enemies/Zombie.tscn" id="2_3hkb6"]
 
 [node name="Level" type="Node2D" unique_id=1986909352]
 
 [node name="Player" parent="." unique_id=226345835 instance=ExtResource("1_vbawi")]
 position = Vector2(936.99994, 769.99994)
-scale = Vector2(5, 5)
+scale = Vector2(4, 4)
+
+[node name="Zombie" parent="." unique_id=1036896926 instance=ExtResource("2_3hkb6")]
+position = Vector2(541, 68.00006)
+scale = Vector2(3.5, 3.5)
+
+[node name="Zombie2" parent="." unique_id=1373678558 instance=ExtResource("2_3hkb6")]
+position = Vector2(1239, 68)
+scale = Vector2(3.5, 3.5)

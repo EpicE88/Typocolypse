@@ -1,0 +1,80 @@
+[gd_scene format=3 uid="uid://bp0ocu07dl4su"]
+
+[ext_resource type="PackedScene" uid="uid://ch005mhsxxkp2" path="res://Scenes/Enemies/EnemyBase.tscn" id="1_k6tf2"]
+[ext_resource type="Texture2D" uid="uid://chkgcoavpsm24" path="res://assets/enemies/Zombie-.png" id="2_gsmrm"]
+
+[sub_resource type="Animation" id="Animation_ivbwk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_gsmrm")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_epfg0"]
+resource_name = "run"
+length = 0.85714287
+loop_mode = 1
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_gsmrm")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.14285715, 0.2857143, 0.42857146, 0.5714286, 0.71428573),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bktxh"]
+_data = {
+&"RESET": SubResource("Animation_ivbwk"),
+&"run": SubResource("Animation_epfg0")
+}
+
+[node name="Zombie" unique_id=1036896926 instance=ExtResource("1_k6tf2")]
+
+[node name="Sprite2D" parent="." index="0" unique_id=169428545]
+texture = ExtResource("2_gsmrm")
+hframes = 6
+
+[node name="Mover" parent="." index="1" unique_id=1738402696]
+direction = Vector2(0, 1)
+
+[node name="AnimationPlayer" parent="." index="2" unique_id=1730096843]
+libraries/ = SubResource("AnimationLibrary_bktxh")
+autoplay = &"run"
