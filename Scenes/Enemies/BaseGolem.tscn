@@ -1,9 +1,9 @@
-[gd_scene format=3 uid="uid://bp0ocu07dl4su"]
+[gd_scene format=3 uid="uid://dnrc8p3emrqto"]
 
-[ext_resource type="PackedScene" uid="uid://ch005mhsxxkp2" path="res://Scenes/Enemies/EnemyBase.tscn" id="1_k6tf2"]
-[ext_resource type="Texture2D" uid="uid://dymjxeiq8xir4" path="res://assets/enemies/zombie/Zombie_Big_Down_Walk-Sheet8.png" id="3_ivbwk"]
+[ext_resource type="PackedScene" uid="uid://ch005mhsxxkp2" path="res://Scenes/Enemies/EnemyBase.tscn" id="1_vmg40"]
+[ext_resource type="Texture2D" uid="uid://dscscfoxgvw7c" path="res://assets/enemies/Golems/Golem1/Run_front-Sheet.png" id="2_oop2x"]
 
-[sub_resource type="Animation" id="Animation_ivbwk"]
+[sub_resource type="Animation" id="Animation_xeh0y"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -15,7 +15,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("3_ivbwk")]
+"values": [ExtResource("2_oop2x")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -24,17 +24,17 @@ tracks/1/path = NodePath("Sprite2D:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.001),
+"times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
 }
 
-[sub_resource type="Animation" id="Animation_epfg0"]
+[sub_resource type="Animation" id="Animation_uiwvm"]
 resource_name = "run"
-length = 0.8
+length = 2.0
 loop_mode = 1
-step = 0.1
+step = 0.25
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -45,7 +45,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("3_ivbwk")]
+"values": [ExtResource("2_oop2x")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -54,29 +54,29 @@ tracks/1/path = NodePath("Sprite2D:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6, 7]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_bktxh"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5dt0i"]
 _data = {
-&"RESET": SubResource("Animation_ivbwk"),
-&"run": SubResource("Animation_epfg0")
+&"RESET": SubResource("Animation_xeh0y"),
+&"run": SubResource("Animation_uiwvm")
 }
 
-[node name="Zombie" unique_id=1036896926 instance=ExtResource("1_k6tf2")]
+[node name="BaseGolem" unique_id=1036896926 instance=ExtResource("1_vmg40")]
 
 [node name="Sprite2D" parent="." index="0" unique_id=169428545]
-texture = ExtResource("3_ivbwk")
+position = Vector2(1, 0)
+texture = ExtResource("2_oop2x")
 hframes = 8
-frame = 1
 
 [node name="Mover" parent="." index="1" unique_id=1738402696]
-speed = 100.0
+speed = 50.0
 direction = Vector2(0, 1)
 
 [node name="AnimationPlayer" parent="." index="2" unique_id=1730096843]
-libraries/ = SubResource("AnimationLibrary_bktxh")
+libraries/ = SubResource("AnimationLibrary_5dt0i")
 autoplay = &"run"

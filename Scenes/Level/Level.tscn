@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://btwnjxrph5uup"]
 
 [ext_resource type="PackedScene" uid="uid://cbok8gygx4qma" path="res://Scenes/Player/Player.tscn" id="1_vbawi"]
-[ext_resource type="PackedScene" uid="uid://bp0ocu07dl4su" path="res://Scenes/Enemies/Zombie.tscn" id="2_3hkb6"]
+[ext_resource type="PackedScene" uid="uid://dnrc8p3emrqto" path="res://Scenes/Enemies/BaseGolem.tscn" id="3_4dwx7"]
+[ext_resource type="PackedScene" uid="uid://bp0ocu07dl4su" path="res://Scenes/Enemies/Zombie.tscn" id="3_qp1lj"]
 
 [node name="Level" type="Node2D" unique_id=1986909352]
 
@@ -9,10 +10,10 @@
 position = Vector2(936.99994, 769.99994)
 scale = Vector2(4, 4)
 
-[node name="Zombie" parent="." unique_id=1036896926 instance=ExtResource("2_3hkb6")]
-position = Vector2(541, 68.00006)
-scale = Vector2(3.5, 3.5)
+[node name="BaseGolem" parent="." unique_id=2129014708 instance=ExtResource("3_4dwx7")]
+position = Vector2(904.00006, 92)
+scale = Vector2(5, 5)
 
-[node name="Zombie2" parent="." unique_id=1373678558 instance=ExtResource("2_3hkb6")]
-position = Vector2(1239, 68)
-scale = Vector2(3.5, 3.5)
+[node name="Zombie" parent="." unique_id=1036896926 instance=ExtResource("3_qp1lj")]
+position = Vector2(528, 60)
+scale = Vector2(4, 4)
